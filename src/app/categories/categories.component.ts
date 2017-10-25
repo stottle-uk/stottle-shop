@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriesService } from './core/categories.service';
+import { ICategory } from './core/ICategory';
 
 @Component({
   selector: 'stottle-categories',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriesComponent implements OnInit {
 
-  constructor() { }
+  categories: ICategory[];
+
+  constructor(private categoriesService: CategoriesService) { }
 
   ngOnInit() {
+    this.categoriesService
+      .getCategories()
+      .subscribe(categories => this.categories = categories);
   }
 
 }
