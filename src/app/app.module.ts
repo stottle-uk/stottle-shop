@@ -10,7 +10,6 @@ import { FilterComponent } from './filter/filter.component';
 import { ProductsComponent } from './products/products.component';
 import { CartComponent } from './cart/cart.component';
 import { FooterComponent } from './footer/footer.component';
-import { CategoriesService } from './categories/core/categories.service';
 
 @NgModule({
   declarations: [
