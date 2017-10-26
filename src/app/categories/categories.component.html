@@ -1,8 +1,25 @@
-<div class="nav nav-pills nav-fill">
+<!-- <div class="nav nav-pills nav-fill">
   <div *ngFor="let category of categories" ngbDropdown class="nav-item d-inline-block">
     <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{category.name}}</button>
     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
       <button *ngFor="let child of category.children" class="dropdown-item">{{child.name}}</button>
     </div>
+  </div>
+</div> -->
+
+<!-- <mat-form-field>
+  <mat-select placeholder="Favorite food">
+    <mat-option *ngFor="let category of categories" [value]="category.code">
+      {{ category.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field> -->
+
+<div fxLayout="row">
+  <div *ngFor="let category of categories">
+    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngFor="let child of category.children" [value]="child.code">{{child.name}}</button>
+    </mat-menu>
   </div>
 </div>

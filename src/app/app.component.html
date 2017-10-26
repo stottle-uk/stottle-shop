@@ -1,19 +1,22 @@
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-    stottle-shop
-  </a>
-</nav>
-
-<stottle-categories></stottle-categories>
-
-<stottle-search></stottle-search>
-
-<stottle-filter></stottle-filter>
-
-<stottle-products></stottle-products>
-
-<stottle-cart></stottle-cart>
-
-<stottle-footer></stottle-footer>
-
- 
+<div class="containerX">
+  <div fxLayout="row wrap" class="colored box nopad">
+    <div fxFlex="grow">
+      <stottle-categories></stottle-categories>
+    </div>
+    <div fxFlex="grow">
+      <stottle-search></stottle-search>
+    </div>
+    <div fxFlex="33.33%">
+      <stottle-filter></stottle-filter>
+    </div>
+    <div fxFlex="33.33%">
+      <stottle-products></stottle-products>
+    </div>
+    <div fxFlex="33.33%">
+      <stottle-cart></stottle-cart>
+    </div>
+    <div fxFlex="grow">
+      <stottle-footer></stottle-footer>
+    </div>
+  </div>
+</div>

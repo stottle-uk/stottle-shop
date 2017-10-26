@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CategoriesModule } from './categories/categories.module';
 
@@ -22,8 +23,9 @@ import { FooterComponent } from './footer/footer.component';
     FooterComponent
   ],
   imports: [
-    BrowserModule,  
-    FlexLayoutModule  
+    BrowserModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
     CategoriesModule,
   ],
   providers: [],
