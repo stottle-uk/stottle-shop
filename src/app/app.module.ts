@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { CategoriesModule } from './categories/categories.module';
 
 import { AppComponent } from './app.component';
@@ -20,7 +22,8 @@ import { FooterComponent } from './footer/footer.component';
     FooterComponent
   ],
   imports: [
-    BrowserModule,    
+    BrowserModule,  
+    FlexLayoutModule  
     CategoriesModule,
   ],
   providers: [],
