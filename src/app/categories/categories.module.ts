@@ -7,7 +7,6 @@ import { CategoriesService } from './core/categories.service';
 @NgModule({
   imports: [
     CommonModule,
-    NgbModule
   ],
   declarations: [
     CategoriesComponent
