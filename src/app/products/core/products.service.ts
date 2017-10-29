@@ -9,14 +9,15 @@ export class ProductsService {
 
     constructor() { }
 
-    getProducts(): Observable<IProduct[]> {
+    getProducts(count: number): Observable<IProduct[]> {
         const products: IProduct[] = [];
-        for (var i = 0; i < 100; i++) {
+        for (var i = 0; i < count; i++) {
             products.push({
                 description: `Product ${i}`,
                 detailLink: '',
                 order: i,
-                price: i * 2.99
+                price: Math.round(i * 2.99),
+                imageLink: ''
             })
         }
         return Observable.of(products);

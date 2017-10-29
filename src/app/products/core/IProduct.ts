@@ -1,6 +1,7 @@
 export interface IProduct {
     detailLink: string,
     description: string,
-    price: number,
-    order: number
+    imageLink: string,
+    order: number,
+    price: number
 }

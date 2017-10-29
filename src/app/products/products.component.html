@@ -1,3 +1,15 @@
-<p>
-  products works!
-</p>
+<h2 class="mb-5">
+  Products
+</h2>
+
+<div class="containerX">
+  <div fxLayout="row wrap" class="colored box nopad">
+    <div fxFlex="20%" *ngFor="let product of products | async">
+      <pre>{{product | json}}</pre>
+    </div>
+  </div>
+</div>
+
+<pre>
+{{products | async | json}}
+</pre>
