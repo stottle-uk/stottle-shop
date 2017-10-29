@@ -5,7 +5,9 @@
 <div class="containerX">
   <div fxLayout="row wrap" class="colored box nopad">
     <div fxFlex="20%" *ngFor="let product of products | async">
-      <pre>{{product | json}}</pre>
+      <pre>{{product.description}}</pre>
+      <button id="addToCart" (click)="addToCart(product)">Add</button>
+      <span>{{ getCount(product) | async}}</span>
     </div>
   </div>
 </div>

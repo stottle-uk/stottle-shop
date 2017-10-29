@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FilterService } from './core/filter.service';
+import { Observable } from 'rxjs/Observable';
+import { IFilter } from './core/IFilterItem';
 
 @Component({
   selector: 'stottle-filter',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilterComponent implements OnInit {
 
-  constructor() { }
+  filters: Observable<IFilter>[];
+
+  constructor(private filterService: FilterService) { }
 
   ngOnInit() {
+    this.filters = [
+      this.filterService.getFilter(10),
+      this.filterService.getFilter(5)
+    ]
   }
 
 }

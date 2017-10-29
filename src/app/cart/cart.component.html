@@ -1,3 +1,11 @@
-<p>
-  cart works!
-</p>
+<h2 class="mb-5">
+  The Cart
+</h2>
+
+<pre>{{cartItems | json}}</pre>
+
+{{cartService.cartItems | async | json}}
+
+<!-- <div *ngFor="let cartItem of cartItems | async">
+  <pre>{{cartItem | json}}</pre>
+</div> -->

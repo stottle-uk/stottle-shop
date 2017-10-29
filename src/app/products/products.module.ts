@@ -5,11 +5,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ProductsComponent } from './products.component';
 import { ProductsService } from './core/products.service';
+import { CartService } from '../cart/core/cart.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   declarations: [
     ProductsComponent
@@ -18,7 +19,8 @@ import { ProductsService } from './core/products.service';
     ProductsComponent
   ],
   providers: [
-    ProductsService
+    ProductsService,
+    CartService
   ]
 })
 export class ProductsModule { }

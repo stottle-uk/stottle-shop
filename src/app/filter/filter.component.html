@@ -1,3 +1,7 @@
-<p>
-  filter works!
-</p>
+<h2 class="mb-5">
+  Filters
+</h2>
+
+<div *ngFor="let filter of filters">
+  <pre>{{filter | async | json}}</pre>
+</div>
