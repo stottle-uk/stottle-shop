@@ -2,21 +2,22 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/from';
-import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/count';
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/reduce';
+import 'rxjs/add/operator/mergeMap';
 
-import { ICartItem } from './ICart';
+import { ICartItem, ICartSummaryItem } from './ICart';
 
 @Injectable()
 export class CartService {
 
-    public cartItems: Observable<ICartItem>;
+    private items: ICartItem[] = [];
 
-    constructor() { 
-        let cartItems = [];
-        for (var i = 0; i < 8; i++) {
-            cartItems.push({
+    constructor() {
+        for (var i = 0; i < 4; i++) {
+            this.items.push({
                 description: `Product ${i}`,
                 detailLink: '',
                 order: i,
@@ -24,22 +25,44 @@ export class CartService {
                 imageLink: ''
             })
         }
-        this.cartItems = Observable.from(cartItems);
-    }
-
-    getCartItems(): Observable<ICartItem> {
-        return this.cartItems;
     }
 
     addItem(item: ICartItem): void {
-        let newItem = Observable.of(item);
-        this.cartItems = this.cartItems.merge(newItem);
+        this.items.push(item);
+    }
+
+    getCartItems(): Observable<ICartItem> {
+        return Observable.from(this.items);
+    }
+
+    getSummary(): Observable<ICartSummaryItem[]> {
+        return this.getCartItems()
+            .map(this.mapToSummaryItem)
+            .reduce(this.reduceSummaryItems, [] as ICartSummaryItem[])
     }
 
     getItemCount(item: ICartItem): Observable<number> {
-        return this.cartItems
+        return this.getCartItems()
             .filter(i => i.description === item.description)
             .count();
     }
 
+    private mapToSummaryItem(cartItem: ICartItem): ICartSummaryItem {
+        return {
+            name: cartItem.description,
+            count: 0
+        }
+    }
+
+    private reduceSummaryItems(items: ICartSummaryItem[], item: ICartSummaryItem): ICartSummaryItem[] {
+        if (!items.some(a => a.name === item.name)) {
+            items.push(item);
+        }
+        return items.map(a => {
+            return {
+                name: a.name,
+                count: a.name === item.name ? a.count + 1 : a.count
+            };
+        });
+    }
 }

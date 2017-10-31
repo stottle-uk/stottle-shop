@@ -2,10 +2,6 @@
   The Cart
 </h2>
 
-<pre>{{cartItems | json}}</pre>
-
-{{cartService.cartItems | async | json}}
-
-<!-- <div *ngFor="let cartItem of cartItems | async">
+<div *ngFor="let cartItem of cartService.getSummary() | async">
   <pre>{{cartItem | json}}</pre>
-</div> -->
+</div>
