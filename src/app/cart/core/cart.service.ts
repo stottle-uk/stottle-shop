@@ -9,33 +9,37 @@ import 'rxjs/add/operator/reduce';
 import 'rxjs/add/operator/mergeMap';
 
 import { ICartItem, ICartSummaryItem } from './ICart';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class CartService {
 
-    private items: ICartItem[] = [];
+    private _items: ICartItem[] = [];
+    private _observableItems: BehaviorSubject<ICartItem[]> = new BehaviorSubject([]);
 
     constructor() { }
 
-    addItem(item: ICartItem): void {
-        this.items.push(item);
-    }
-
-    removeItem(item: ICartItem): void {
-        const index = this.items.findIndex(i => i.id === item.id);
-        if (index > -1) {
-            this.items.splice(index, 1);
-        }
-    }
-
-    getCartItems(): Observable<ICartItem> {
-        return Observable.from(this.items);
-    }
-
-    getSummary(): Observable<ICartSummaryItem[]> {
+    get observableSummary(): Observable<ICartSummaryItem[]> {
         return this.getCartItems()
             .map(this.mapToSummaryItem)
             .reduce(this.reduceSummaryItems, [] as ICartSummaryItem[])
+    }
+
+    addItem(item: ICartItem): void {
+        this._items.push(item);
+        this._observableItems.next(this._items);
+    }
+
+    removeItem(item: ICartItem): void {
+        const index = this._items.findIndex(i => i.id === item.id);
+        if (index > -1) {
+            this._items.splice(index, 1);
+        }
+        this._observableItems.next(this._items);
+    }
+
+    getCartItems(): Observable<ICartItem> {
+        return Observable.from(this._items);
     }
 
     getItemCount(item: ICartItem): Observable<number> {

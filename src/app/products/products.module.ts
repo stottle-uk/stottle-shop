@@ -18,7 +18,7 @@ import { CartService } from '../cart/core/cart.service';
     ProductsComponent
   ],
   exports: [
-    ProductsComponent
+    ProductsComponent,
   ],
   providers: [
     ProductsService,

@@ -18,7 +18,7 @@ export class CategoriesService implements OnInit {
       categories.push({
         name: `name ${i}`,
         children: this.buildChildren(i),
-        code: `code ${i}`
+        code: `0${i}`
       })
     }
     return Observable.of(categories);
@@ -29,7 +29,7 @@ export class CategoriesService implements OnInit {
     for (var i = 0; i < count; i++) {
       categories.push({
         name: `child ${i}`,
-        code: `code ${i}`
+        code: `1${i}`
       })
     }
     return categories;

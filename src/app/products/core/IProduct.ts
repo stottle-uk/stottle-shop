@@ -5,4 +5,5 @@ export interface IProduct {
     imageLink: string;
     order: number;
     price: number;
+    categoryCode: string;
 }

@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.products = this.productsService.getProducts(25);
+    this.products = this.productsService.observableProducts;
   }
 
   addToCart(product: IProduct): void {

@@ -2,7 +2,7 @@
   The Cart
 </h2>
 
-<div *ngFor="let cartItem of cartService.getSummary() | async">
+<div *ngFor="let cartItem of cartService.observableSummary | async">
   <mat-card>
     <pre>{{cartItem | json}}</pre>
   </mat-card>
