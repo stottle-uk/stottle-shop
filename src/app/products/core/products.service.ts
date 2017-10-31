@@ -13,6 +13,7 @@ export class ProductsService {
         const products: IProduct[] = [];
         for (var i = 0; i < count; i++) {
             products.push({
+                id: i.toString(),
                 description: `Product ${i}`,
                 detailLink: '',
                 order: i,

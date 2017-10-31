@@ -1,6 +1,7 @@
 import { Observable } from "rxjs/Observable";
 
 export interface ICartItem {
+    id: string;    
     imageLink: string,
     description: string,
     detailLink: string,
@@ -9,6 +10,7 @@ export interface ICartItem {
 }
 
 export interface ICartSummaryItem {
+    id: string;
     name: string,
     count: number;
 }

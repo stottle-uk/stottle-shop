@@ -5,14 +5,16 @@
 <div class="containerX">
   <div fxLayout="row wrap" class="colored box nopad">
     <div fxFlex="25%" *ngFor="let product of products | async">
-      <mat-card dense>
+      <mat-card>
         <mat-card-title>{{product.description}}</mat-card-title>
 
         <mat-card-footer>
 
-          <button id="addToCart" (click)="addToCart(product)">Add</button>
+          <button id="addToCart" (click)="addToCart(product)">+</button>
 
           <span>{{ getCount(product) | async}}</span>
+          <button id="addToCart" (click)="removeFromCart(product)">-</button>
+          
         </mat-card-footer>
       </mat-card>
     </div>

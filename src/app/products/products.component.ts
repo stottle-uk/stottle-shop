@@ -15,7 +15,10 @@ export class ProductsComponent implements OnInit {
 
   products: Observable<IProduct[]>;
 
-  constructor(private productsService: ProductsService, private cartService: CartService) { }
+  constructor(
+    private productsService: ProductsService,
+    private cartService: CartService
+  ) { }
 
   ngOnInit() {
     this.products = this.productsService.getProducts(25);
@@ -26,6 +29,11 @@ export class ProductsComponent implements OnInit {
     this.cartService.addItem(cartItem);
   }
 
+  removeFromCart(product: IProduct): void {
+    const cartItem = this.convertToCartItem(product)
+    this.cartService.removeItem(cartItem);
+  }
+
   getCount(product: IProduct): Observable<number> {
     const cartItem = this.convertToCartItem(product)
     return this.cartService.getItemCount(cartItem);
@@ -33,11 +41,12 @@ export class ProductsComponent implements OnInit {
 
   private convertToCartItem(product: IProduct): ICartItem {
     return {
+      id: product.id,
       detailLink: product.detailLink,
       description: product.description,
       imageLink: product.imageLink,
       order: product.order,
-      price: product.price
+      price: product.price,
     };
   }
 

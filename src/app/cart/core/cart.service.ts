@@ -15,20 +15,17 @@ export class CartService {
 
     private items: ICartItem[] = [];
 
-    constructor() {
-        for (var i = 0; i < 4; i++) {
-            this.items.push({
-                description: `Product ${i}`,
-                detailLink: '',
-                order: i,
-                price: Math.round(i * 2.99),
-                imageLink: ''
-            })
-        }
-    }
+    constructor() { }
 
     addItem(item: ICartItem): void {
         this.items.push(item);
+    }
+
+    removeItem(item: ICartItem): void {
+        const index = this.items.findIndex(i => i.id === item.id);
+        if (index > -1) {
+            this.items.splice(index, 1);
+        }
     }
 
     getCartItems(): Observable<ICartItem> {
@@ -43,25 +40,27 @@ export class CartService {
 
     getItemCount(item: ICartItem): Observable<number> {
         return this.getCartItems()
-            .filter(i => i.description === item.description)
+            .filter(i => i.id === item.id)
             .count();
     }
 
     private mapToSummaryItem(cartItem: ICartItem): ICartSummaryItem {
         return {
+            id: cartItem.id,
             name: cartItem.description,
             count: 0
         }
     }
 
     private reduceSummaryItems(items: ICartSummaryItem[], item: ICartSummaryItem): ICartSummaryItem[] {
-        if (!items.some(a => a.name === item.name)) {
+        if (!items.some(a => a.id === item.id)) {
             items.push(item);
         }
         return items.map(a => {
             return {
+                id: a.id,
                 name: a.name,
-                count: a.name === item.name ? a.count + 1 : a.count
+                count: a.id === item.id ? a.count + 1 : a.count
             };
         });
     }
