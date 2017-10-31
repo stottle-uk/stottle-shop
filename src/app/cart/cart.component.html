@@ -3,5 +3,7 @@
 </h2>
 
 <div *ngFor="let cartItem of cartService.getSummary() | async">
-  <pre>{{cartItem | json}}</pre>
+  <mat-card>
+    <pre>{{cartItem | json}}</pre>
+  </mat-card>
 </div>
