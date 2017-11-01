@@ -1,5 +1,5 @@
 <div fxLayout="row">
-  <div *ngFor="let category of categories">
+  <div *ngFor="let category of categories | async">
     <button mat-button [matMenuTriggerFor]="menu">Menu</button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item *ngFor="let child of category.children" [value]="child.code" (click)="searchCategory(child)">{{child.name}}</button>

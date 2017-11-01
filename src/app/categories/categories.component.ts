@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from './core/categories.service';
 import { ICategory } from './core/ICategory';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'stottle-categories',
@@ -9,16 +10,14 @@ import { ICategory } from './core/ICategory';
 })
 export class CategoriesComponent implements OnInit {
 
-  categories: ICategory[];
+  categories: Observable<ICategory[]>;
 
   constructor(
     private categoriesService: CategoriesService,
   ) { }
 
   ngOnInit() {
-    this.categoriesService
-      .getCategories()
-      .subscribe(categories => this.categories = categories);
+    this.categories = this.categoriesService.observavleCategories;
   }
 
   searchCategory(category: ICategory) {

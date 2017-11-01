@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class CategoriesService {
 
+  private _observavleCategories: BehaviorSubject<ICategory[]> = new BehaviorSubject([]);
   private _observableCurrentCategory: BehaviorSubject<IChildCategory> = new BehaviorSubject({
     name: '',
     code: ''
@@ -15,6 +16,10 @@ export class CategoriesService {
 
   constructor() {
     this.getCategories();
+  }
+
+  get observavleCategories(): Observable<ICategory[]> {
+    return this._observavleCategories.asObservable()
   }
 
   get observableCurrentCategory(): Observable<IChildCategory> {
@@ -25,7 +30,7 @@ export class CategoriesService {
     this._observableCurrentCategory.next(category);
   }
 
-  getCategories(): Observable<ICategory[]> {
+  private getCategories(): void {
     const categories = [];
     for (var i = 0; i < 8; i++) {
       categories.push({
@@ -34,7 +39,7 @@ export class CategoriesService {
         code: `0${i}`
       })
     }
-    return Observable.of(categories);
+    this._observavleCategories.next(categories);
   }
 
   private buildChildren(count: number): IChildCategory[] {
