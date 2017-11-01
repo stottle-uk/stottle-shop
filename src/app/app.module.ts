@@ -8,16 +8,14 @@ import { CartModule } from './cart/cart.module';
 import { CategoriesModule } from './categories/categories.module';
 import { FilterModule } from './filter/filter.module';
 import { ProductsModule } from './products/products.module';
+import { SearchModule } from './search/search.module';
 
 import { AppComponent } from './app.component';
-import { SearchComponent } from './search/search.component';
 import { FooterComponent } from './footer/footer.component';
-import { SearchService } from './search/core/search.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent,
     FooterComponent
   ],
   imports: [
@@ -27,9 +25,10 @@ import { SearchService } from './search/core/search.service';
     CartModule,
     CategoriesModule,
     FilterModule,
-    ProductsModule
+    ProductsModule,
+    SearchModule
   ],
-  providers: [SearchService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
