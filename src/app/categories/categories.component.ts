@@ -24,6 +24,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   searchCategory(category: ICategory) {
+    this.categoriesService.setCurrentCategory(category);
     this.productsService.setCategory(category.code);
   }
 

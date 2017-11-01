@@ -10,15 +10,12 @@ import { IFilter } from './core/IFilterItem';
 })
 export class FilterComponent implements OnInit {
 
-  filters: Observable<IFilter>[];
+  filters: Observable<IFilter[]>;
 
   constructor(private filterService: FilterService) { }
 
   ngOnInit() {
-    this.filters = [
-      this.filterService.getFilter(10),
-      this.filterService.getFilter(5)
-    ]
+    this.filters = this.filterService.observableFilters;
   }
 
 }

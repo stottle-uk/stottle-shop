@@ -2,6 +2,6 @@
   Filters
 </h2>
 
-<div *ngFor="let filter of filters">
-  <pre>{{filter | async | json}}</pre>
+<div *ngFor="let filter of filters | async">
+  <pre>{{filter | json}}</pre>
 </div>

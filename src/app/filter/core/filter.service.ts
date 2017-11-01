@@ -2,19 +2,38 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/switchMap';
+
 import { IFilterItem, IFilter } from './IFilterItem';
+import { CategoriesService } from '../../categories/core/categories.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class FilterService {
 
-    constructor() { }
+    private _observableFilters: BehaviorSubject<IFilter[]> = new BehaviorSubject([]);
 
-    getFilter(count: number): Observable<IFilter> {
-        const filter = {
-            displayName: `Filter ${count}`,
-            items: this.getFilterItems(count)
-        };
-        return Observable.of(filter);
+    constructor(private categoriesService: CategoriesService) {
+        this.setFilterObservable();
+    }
+
+    get observableFilters(): Observable<IFilter[]> {
+        return this._observableFilters.asObservable()
+    }
+
+    private setFilterObservable() {
+        this.categoriesService
+            .observableCurrentCategory
+            .switchMap(cat => {
+                const filter: IFilter = {
+                    displayName: `Filter ${cat.name}`,
+                    items: this.getFilterItems(10)
+                };
+                return Observable.of([filter]);
+            })
+            .subscribe(filters => {
+                this._observableFilters.next(filters);
+            });
     }
 
     private getFilterItems(count: number): IFilterItem[] {
