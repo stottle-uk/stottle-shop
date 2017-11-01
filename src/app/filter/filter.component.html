@@ -3,5 +3,8 @@
 </h2>
 
 <div *ngFor="let filter of filters | async">
-  <pre>{{filter | json}}</pre>
+  {{filter.displayName}}  
+  <div *ngFor="let childFilter of filter.items">
+      <pre (click)="toggleFilter(childFilter)">{{childFilter | json}}</pre>
+  </div>
 </div>

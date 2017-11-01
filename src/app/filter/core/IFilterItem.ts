@@ -1,9 +1,10 @@
 export interface IFilterItem {
-    displayName: string,
-    code: string,
+    displayName: string;
+    code: string;
+    isSelected: boolean;
 }
 
 export interface IFilter {
-    displayName: string,
-    items: IFilterItem[]
+    displayName: string;
+    items: IFilterItem[];
 }

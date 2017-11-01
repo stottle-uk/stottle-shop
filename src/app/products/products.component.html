@@ -6,8 +6,8 @@
   <div fxLayout="row wrap" class="colored box nopad">
     <div fxFlex="25%" *ngFor="let product of products | async">
       <mat-card>
-        <mat-card-title>{{product.description}}</mat-card-title>
-
+        <mat-card-title></mat-card-title>
+        {{product.description}}
         <mat-card-footer>
 
           <button id="addToCart" (click)="addToCart(product)">+</button>
@@ -20,7 +20,3 @@
     </div>
   </div>
 </div>
-
-<pre>
-{{products | async | json}}
-</pre>
