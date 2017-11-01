@@ -6,17 +6,20 @@ import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/merge';
 
-import { IProduct } from './IProduct';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { CategoriesService } from '../../categories/core/categories.service';
-import { IChildCategory } from '../../categories/core/ICategory';
 import { FilterService } from '../../filter/core/filter.service';
+import { SearchService } from '../../search/core/search.service';
+
+import { IChildCategory } from '../../categories/core/ICategory';
 import { IFilterItem } from '../../filter/core/IFilterItem';
+import { IProduct } from './IProduct';
 
 export interface IProductFilters {
     category: IChildCategory;
     filters: IFilterItem[];
+    searchTerm: string;
 }
 
 @Injectable()
@@ -28,13 +31,15 @@ export class ProductsService {
             code: '',
             name: ''
         },
-        filters: []
+        filters: [],
+        searchTerm: ''
     };
     private _observableProductFilters: BehaviorSubject<IProductFilters> = new BehaviorSubject(this._productFilters);
 
     constructor(
         private categoriesService: CategoriesService,
         private filterService: FilterService,
+        private searchService: SearchService
 
     ) {
         this.categoriesService
@@ -51,14 +56,21 @@ export class ProductsService {
                 this._observableProductFilters.next(this._productFilters);
             });
 
+        this.searchService
+            .observableSearchTerm
+            .subscribe(searchTerm => {
+                this._productFilters.searchTerm = searchTerm;
+                this._observableProductFilters.next(this._productFilters);
+            });
+
         this._observableProductFilters
             .subscribe(filter => {
                 let temp = []
                 for (var i = 0; i < 24; i++) {
                     temp.push({
-                        categoryCode: `010${i}`,
+                        categoryCode: `${filter.category.name}`,
                         id: i.toString(),
-                        description: `Product ${filter.category.name} ${filter.filters.reduce((prev, acc) => `${prev}-${acc.code}`, '')}`,
+                        description: `Product ${filter.searchTerm} ${filter.filters.reduce((prev, acc) => `${prev}-${acc.code}`, '')}`,
                         detailLink: '',
                         order: i,
                         price: Math.round(i * 2.99),

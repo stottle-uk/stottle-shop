@@ -12,6 +12,7 @@ import { ProductsModule } from './products/products.module';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
 import { FooterComponent } from './footer/footer.component';
+import { SearchService } from './search/core/search.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { FooterComponent } from './footer/footer.component';
     FilterModule,
     ProductsModule
   ],
-  providers: [],
+  providers: [SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
