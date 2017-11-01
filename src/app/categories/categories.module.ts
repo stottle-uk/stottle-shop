@@ -6,9 +6,7 @@ import { MatButtonModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material';
 
 import { CategoriesComponent } from './categories.component';
-
 import { CategoriesService } from './core/categories.service';
-import { ProductsService } from '../products/core/products.service';
 
 @NgModule({
   imports: [
@@ -24,8 +22,7 @@ import { ProductsService } from '../products/core/products.service';
     CategoriesComponent
   ],
   providers: [
-    CategoriesService,
-    ProductsService
+    CategoriesService
   ]
 })
 export class CategoriesModule { }

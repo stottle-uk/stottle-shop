@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/of';
@@ -6,21 +6,19 @@ import { ICategory, IChildCategory } from './ICategory';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
-export class CategoriesService implements OnInit {
+export class CategoriesService {
 
   private _observableCurrentCategory: BehaviorSubject<IChildCategory> = new BehaviorSubject({
     name: '',
     code: ''
   });
 
-  constructor() { }
+  constructor() {
+    this.getCategories();
+  }
 
   get observableCurrentCategory(): Observable<IChildCategory> {
     return this._observableCurrentCategory.asObservable()
-  }
-
-  ngOnInit() {
-    this.getCategories()
   }
 
   setCurrentCategory(category: IChildCategory): void {

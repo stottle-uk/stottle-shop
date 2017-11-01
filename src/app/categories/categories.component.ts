@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from './core/categories.service';
 import { ICategory } from './core/ICategory';
-import { ProductsService } from '../products/core/products.service';
 
 @Component({
   selector: 'stottle-categories',
@@ -14,7 +13,6 @@ export class CategoriesComponent implements OnInit {
 
   constructor(
     private categoriesService: CategoriesService,
-    private productsService: ProductsService
   ) { }
 
   ngOnInit() {
@@ -25,7 +23,6 @@ export class CategoriesComponent implements OnInit {
 
   searchCategory(category: ICategory) {
     this.categoriesService.setCurrentCategory(category);
-    this.productsService.setCategory(category.code);
   }
 
 }
