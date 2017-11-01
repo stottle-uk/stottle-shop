@@ -31,7 +31,7 @@ export class CartService {
     }
 
     removeItem(item: ICartItem): void {
-        const index = this._items.findIndex(i => i.id === item.id);
+        const index = this._items.reverse().findIndex(i => i.id === item.id);
         if (index > -1) {
             this._items.splice(index, 1);
         }
