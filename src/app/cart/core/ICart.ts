@@ -9,8 +9,6 @@ export interface ICartItem {
     order: number
 }
 
-export interface ICartSummaryItem {
-    id: string;
-    name: string,
+export interface ICartSummaryItem extends ICartItem {
     count: number;
 }

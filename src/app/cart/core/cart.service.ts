@@ -20,9 +20,9 @@ export class CartService {
     constructor() { }
 
     get observableSummary(): Observable<ICartSummaryItem[]> {
-        return this.getCartItems()
+        return Observable.from(this._items)
             .map(this.mapToSummaryItem)
-            .reduce(this.reduceSummaryItems, [] as ICartSummaryItem[])
+            .reduce(this.reduceSummaryItems, [] as ICartSummaryItem[]);
     }
 
     addItem(item: ICartItem): void {
@@ -31,21 +31,15 @@ export class CartService {
     }
 
     removeItem(item: ICartItem): void {
-        const index = this._items
-            .reverse()
-            .findIndex(i => i.id === item.id);
+        const index = this._items.findIndex(i => i.id === item.id);
         if (index > -1) {
             this._items.splice(index, 1);
         }
         this._observableItems.next(this._items);
     }
 
-    getCartItems(): Observable<ICartItem> {
-        return Observable.from(this._items);
-    }
-
     getItemCount(item: ICartItem): Observable<number> {
-        return this.getCartItems()
+        return Observable.from(this._items)
             .filter(i => i.id === item.id)
             .count();
     }
@@ -53,20 +47,28 @@ export class CartService {
     private mapToSummaryItem(cartItem: ICartItem): ICartSummaryItem {
         return {
             id: cartItem.id,
-            name: cartItem.description,
-            count: 0
+            count: 0,
+            description: cartItem.description,
+            detailLink: cartItem.detailLink,
+            imageLink: cartItem.imageLink,
+            order: cartItem.order,
+            price: cartItem.price 
         }
     }
 
-    private reduceSummaryItems(items: ICartSummaryItem[], item: ICartSummaryItem): ICartSummaryItem[] {
+    private reduceSummaryItems(items: ICartSummaryItem[], item: ICartSummaryItem): ICartSummaryItem[] {       
         if (!items.some(a => a.id === item.id)) {
             items.push(item);
         }
         return items.map(a => {
             return {
                 id: a.id,
-                name: a.name,
-                count: a.id === item.id ? a.count + 1 : a.count
+                count: a.id === item.id ? a.count + 1 : a.count,
+                description: a.description,
+                detailLink: a.detailLink,
+                imageLink: a.imageLink,
+                order: a.order,
+                price: a.price 
             };
         });
     }

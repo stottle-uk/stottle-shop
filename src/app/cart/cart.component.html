@@ -2,8 +2,15 @@
   The Cart
 </h2>
 
-<div *ngFor="let cartItem of cartService.observableSummary | async">
+{{cartSummaryItems | async}}
+
+<div *ngFor="let summaryItem of cartService.observableSummary | async">
   <mat-card>
-    <pre>{{cartItem | json}}</pre>
+    <pre>{{summaryItem | json}}</pre>
+
+    <button id="addToCart" (click)="addToCart(summaryItem)">+</button>
+    <span>{{ getCount(summaryItem) | async}}</span>
+    <button id="removeFromCart" (click)="removeFromCart(summaryItem)">-</button>
+
   </mat-card>
 </div>

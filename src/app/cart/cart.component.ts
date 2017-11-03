@@ -21,4 +21,16 @@ export class CartComponent implements OnInit {
     this.cartSummaryItems = this.cartService.observableSummary;
   }
 
+  addToCart(cartItem: ICartItem): void {
+    this.cartService.addItem(cartItem);
+  }
+
+  removeFromCart(cartItem: ICartItem): void {
+    this.cartService.removeItem(cartItem);
+  }
+
+  getCount(cartItem: ICartItem): Observable<number> {
+    return this.cartService.getItemCount(cartItem);
+  }
+
 }

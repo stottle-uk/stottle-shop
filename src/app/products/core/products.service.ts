@@ -45,7 +45,8 @@ export class ProductsService {
         this.categoriesService
             .observableCurrentCategory
             .subscribe(cat => {
-                this._productFilters.category = cat
+                this._productFilters.category = cat;
+                this._productFilters.filters = [];
                 this._observableProductFilters.next(this._productFilters);
             });
 
