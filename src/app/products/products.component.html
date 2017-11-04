@@ -1,23 +1,33 @@
-<h2 class="mb-5">
-  Products
-</h2>
+<div class="container">
+  <div fxLayout="row" fxLayoutWrap>
+    <div fxFlex *ngFor="let product of products | async; let i = index">
 
-<div class="containerX">
-  <div fxLayout="row wrap" class="colored box nopad">
-    <div fxFlex="25%" *ngFor="let product of products | async">
-      <mat-card>
-        <mat-card-title></mat-card-title>
-        {{product.description}}
-        {{product.categoryCode}}
-        
-        <mat-card-footer>
+      <mat-card class="stottle-card">
+        <!-- <img mat-card-image src="https://loremflickr.com/250/125?random={{i}}" /> -->
+        <img mat-card-image src="http://via.placeholder.com/300x300" />
+        <md-card-content>
+          <mat-card-title>{{product.description}}</mat-card-title>
+          {{product.categoryCode}}
+        </md-card-content>
 
-          <button id="addToCart" (click)="addToCart(product)">+</button>
-          <span>{{ getCount(product) | async}}</span>
-          <button id="removeFromCart" (click)="removeFromCart(product)">-</button>
-          
-        </mat-card-footer>
+        <mat-card-actions>
+          <div class="container">
+            <div fxLayout="row" style="text-align: center">
+              <div fxFlex="33">
+                <button mat-icon-button id="removeFromCart" (click)="removeFromCart(product)">-</button>
+              </div>
+              <div fxFlex="33">
+                <button mat-icon-button id="cartCount">{{ getCount(product) | async}}</button>
+              </div>
+              <div fxFlex="33">
+                <button mat-icon-button id="addToCart" (click)="addToCart(product)">+</button>
+              </div>
+            </div>
+          </div>
+        </mat-card-actions>
+
       </mat-card>
+
     </div>
   </div>
 </div>

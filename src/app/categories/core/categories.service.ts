@@ -15,7 +15,7 @@ export class CategoriesService {
   });
 
   constructor() {
-    this.getCategories();
+    this.setupCategoriesObservable();
   }
 
   get observavleCategories(): Observable<ICategory[]> {
@@ -30,7 +30,7 @@ export class CategoriesService {
     this._observableCurrentCategory.next(category);
   }
 
-  private getCategories(): void {
+  private setupCategoriesObservable(): void {
     const categories = [];
     for (var i = 0; i < 8; i++) {
       categories.push({

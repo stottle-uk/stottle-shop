@@ -16,7 +16,7 @@ export class FilterService {
     private _observableSelectedFilters: BehaviorSubject<IFilterItem[]> = new BehaviorSubject([]);
 
     constructor(private categoriesService: CategoriesService) {
-        this.setFilterObservable();
+        this.setupFilterObservable();
     }
 
     get observableFilters(): Observable<IFilter[]> {
@@ -37,10 +37,12 @@ export class FilterService {
         this._observableSelectedFilters.next(this._selectedfilters);
     }
 
-    private setFilterObservable() {
+    private setupFilterObservable() {
         this.categoriesService
             .observableCurrentCategory
             .switchMap(cat => {
+                this._observableSelectedFilters.next([]);
+                
                 const filter: IFilter = {
                     displayName: `Filter ${cat.name}`,
                     items: this.getFilterItems(10)

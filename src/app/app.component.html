@@ -1,22 +1,36 @@
-<div class="containerX">
-  <div fxLayout="row wrap" class="colored box nopad">
-    <div fxFlex="grow">
-      <stottle-categories></stottle-categories>
-    </div>
-    <div fxFlex="grow">
-      <stottle-search></stottle-search>
-    </div>
-    <div fxFlex="20%">
-      <stottle-filter></stottle-filter>
-    </div>
-    <div fxFlex="60%">
-      <stottle-products></stottle-products>
-    </div>
-    <div fxFlex="20%">
-      <stottle-cart></stottle-cart>
-    </div>
-    <div fxFlex="grow">
-      <stottle-footer></stottle-footer>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav class="example-sidenav">
+    <stottle-categories></stottle-categories>
+    <stottle-search></stottle-search>
+    <stottle-filter></stottle-filter>
+  </mat-sidenav>
+
+  <mat-toolbar color="primary">
+    <span>stottle-shop</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button [mat-menu-trigger-for]="menu">
+      <mat-icon>filter_list</mat-icon>
+    </button>
+    <button mat-icon-button (click)="sidenav.open()">
+      <mat-icon>add_shopping_cart</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-menu x-position="before" #menu="matMenu">
+    <button mat-menu-item>Option 1</button>
+    <button mat-menu-item>Option 2</button>
+  </mat-menu>
+
+  <div class="example-sidenav-content">
+    <div fxLayout="column">
+      <div fxFlex>
+        <stottle-products></stottle-products>
+      </div>
+      <div fxFlex>
+        <stottle-cart></stottle-cart>
+      </div>
+      <div fxFlex>
+        <stottle-footer></stottle-footer>
+      </div>
     </div>
   </div>
-</div>
+</mat-sidenav-container>

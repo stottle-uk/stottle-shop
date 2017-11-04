@@ -5,6 +5,6 @@
 <div *ngFor="let filter of filters | async">
   {{filter.displayName}}  
   <div *ngFor="let childFilter of filter.items">
-      <pre (click)="toggleFilter(childFilter)">{{childFilter | json}}</pre>
+      <pre (click)="toggleFilter(childFilter)">{{childFilter.displayName | json}}</pre>
   </div>
 </div>
