@@ -1,1 +1,3 @@
-<input #searchTerm type="text" (keyup)="searchService.updateSearchTerm(searchTerm.value)">
+<mat-form-field class="example-full-width">
+    <input matInput #searchTerm type="text" (keyup)="searchService.updateSearchTerm(searchTerm.value)" placeholder="search products...">
+</mat-form-field>

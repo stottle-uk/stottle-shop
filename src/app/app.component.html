@@ -1,13 +1,13 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav class="example-sidenav">
     <stottle-categories></stottle-categories>
-    <stottle-search></stottle-search>
     <stottle-filter></stottle-filter>
   </mat-sidenav>
 
   <mat-toolbar color="primary">
     <span>stottle-shop</span>
     <span class="example-spacer"></span>
+    <stottle-search></stottle-search>
     <button mat-icon-button [mat-menu-trigger-for]="menu">
       <mat-icon>filter_list</mat-icon>
     </button>
