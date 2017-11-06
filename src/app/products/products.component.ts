@@ -43,8 +43,8 @@ export class ProductsComponent implements OnInit {
     return {
       id: product.id,
       detailLink: product.detailLink,
-      description: product.description,
-      imageLink: product.imageLink,
+      description: product.displayName,
+      imageLink: product.imageLinks[0],
       order: product.order,
       price: product.price,
     };

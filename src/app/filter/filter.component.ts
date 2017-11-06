@@ -18,9 +18,9 @@ export class FilterComponent implements OnInit {
     this.filters = this.filterService.observableFilters; 
   }
 
-  toggleFilter(childFilter: IFilterItem): void {
-    childFilter.isSelected = !childFilter.isSelected;
-    this.filterService.toggleFilter(childFilter);
+  toggleFilter(filterItem: IFilterItem): void {
+    filterItem.isSelected = !filterItem.isSelected;
+    this.filterService.toggleFilter(filterItem);
   }
 
 }

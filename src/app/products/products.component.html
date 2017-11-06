@@ -6,8 +6,10 @@
         <!-- <img mat-card-image src="https://loremflickr.com/250/125?random={{i}}" /> -->
         <img mat-card-image src="http://via.placeholder.com/300x300" />
         <md-card-content>
-          <mat-card-title>{{product.description}}</mat-card-title>
-          {{product.categoryCode}}
+          <mat-card-title>{{product.displayName}}</mat-card-title>
+          {{product.category | json}}
+          {{product.filters | json}}
+          
         </md-card-content>
 
         <mat-card-actions>

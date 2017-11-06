@@ -1,18 +1,19 @@
-import { IChildCategory } from "../../categories/core/ICategory";
 import { IFilterItem } from "../../filter/core/IFilterItem";
+import { ICategory } from "../../categories/core/ICategory";
 
 export interface IProduct {
     id: string;
     detailLink: string;
-    description: string;
-    imageLink: string;
+    displayName: string;
+    imageLinks: { [key: number]: string };
     order: number;
     price: number;
-    categoryCode: string;
+    category: ICategory;
+    filters: IFilterItem;
 }
 
 export interface IProductFilters {
-    category: IChildCategory;
-    filters: IFilterItem[];
+    category: string;
+    filters: string;
     searchTerm: string;
 }

@@ -1,8 +1,8 @@
 <div fxLayout="column">
   <div fxFlex *ngFor="let category of categories | async">
-    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <button mat-button [mat-menu-trigger-for]="menu">{{category.displayName}}</button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item *ngFor="let child of category.children" [value]="child.code" (click)="searchCategory(child)">{{child.name}}</button>
+      <button mat-menu-item *ngFor="let child of category.childCategories" [value]="child.code" (click)="searchCategory(child)">{{child.displayName}}</button>
     </mat-menu>
   </div>
 </div>

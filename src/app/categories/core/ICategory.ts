@@ -1,10 +1,5 @@
 export interface ICategory {
     name: string,
-    children: IChildCategory[],
+    childCategories: ICategory[],
     code: string
-}
-
-export interface IChildCategory {
-    name: string;
-    code: string;
 }

@@ -7,6 +7,7 @@ import 'rxjs/add/operator/switchMap';
 import { IFilterItem, IFilter } from './IFilterItem';
 import { CategoriesService } from '../../categories/core/categories.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class FilterService {
@@ -15,7 +16,10 @@ export class FilterService {
     private _observableFilters: BehaviorSubject<IFilter[]> = new BehaviorSubject([]);
     private _observableSelectedFilters: BehaviorSubject<IFilterItem[]> = new BehaviorSubject([]);
 
-    constructor(private categoriesService: CategoriesService) {
+    constructor(
+        private categoriesService: CategoriesService,
+        private http: HttpClient
+    ) {
         this.setupFilterObservable();
     }
 
@@ -39,31 +43,15 @@ export class FilterService {
 
     private setupFilterObservable() {
         this.categoriesService
-            .observableCurrentCategory
+            .observablSelectedCategory
             .switchMap(cat => {
-                this._observableSelectedFilters.next([]);
-                
-                const filter: IFilter = {
-                    displayName: `Filter ${cat.name}`,
-                    items: this.getFilterItems(10)
-                };
-                return Observable.of([filter]);
+                this._selectedfilters = [];
+                this._observableSelectedFilters.next(this._selectedfilters);
+                return this.http
+                    .get<IFilter[]>('http://localhost:5000/api/filters/1,2,3');
             })
             .subscribe(filters => {
                 this._observableFilters.next(filters);
             });
     }
-
-    private getFilterItems(count: number): IFilterItem[] {
-        const filterItems: IFilterItem[] = [];
-        for (var i = 0; i < count; i++) {
-            filterItems.push({
-                displayName: `Product ${i}`,
-                code: `${i}`,
-                isSelected: false
-            })
-        }
-        return filterItems;
-    }
-
 }
