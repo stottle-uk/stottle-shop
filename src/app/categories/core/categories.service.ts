@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { ICategory } from './ICategory';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class CategoriesService {
@@ -15,7 +12,8 @@ export class CategoriesService {
   private _observableCurrentCategory: BehaviorSubject<ICategory> = new BehaviorSubject({
     name: '',
     code: '',
-    childCategories: []
+    childCategories: [],
+    filters: []
   });
 
   constructor(private http: HttpClient) {
@@ -38,27 +36,6 @@ export class CategoriesService {
     this.http
       .get<ICategory[]>("http://localhost:5000/api/category/1")
       .subscribe(category => this._observavleCategories.next(category));
-
-    // const categories = [];
-    // for (var i = 0; i < 8; i++) {
-    //   categories.push({
-    //     name: `name ${i}`,
-    //     children: this.buildChildren(i),
-    //     code: `0${i}`
-    //   })
-    // }
-    // this._observavleCategories.next(categories);
   }
-
-  // private buildChildren(count: number): IChildCategory[] {
-  //   const categories = [];
-  //   for (var i = 0; i < count; i++) {
-  //     categories.push({
-  //       name: `child ${i}`,
-  //       code: `1${i}`
-  //     })
-  //   }
-  //   return categories;
-  // }
 
 }

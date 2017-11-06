@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
 import { CategoriesService } from './core/categories.service';
 import { ICategory } from './core/ICategory';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'stottle-categories',

@@ -47,8 +47,15 @@ export class FilterService {
             .switchMap(cat => {
                 this._selectedfilters = [];
                 this._observableSelectedFilters.next(this._selectedfilters);
-                return this.http
-                    .get<IFilter[]>('http://localhost:5000/api/filters/1,2,3');
+                const filters = cat.filters.map(f => f).join(',');
+
+                if (filters !== '') {
+                    return this.http
+                        .get<IFilter[]>(`http://localhost:5000/api/filters/${filters}`);
+                }
+                else {
+                    return Observable.of([])
+                }
             })
             .subscribe(filters => {
                 this._observableFilters.next(filters);
