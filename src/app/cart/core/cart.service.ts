@@ -48,7 +48,7 @@ export class CartService {
         return {
             id: cartItem.id,
             count: 0,
-            description: cartItem.description,
+            displayName: cartItem.displayName,
             detailLink: cartItem.detailLink,
             imageLink: cartItem.imageLink,
             order: cartItem.order,
@@ -64,7 +64,7 @@ export class CartService {
             return {
                 id: a.id,
                 count: a.id === item.id ? a.count + 1 : a.count,
-                description: a.description,
+                displayName: a.displayName,
                 detailLink: a.detailLink,
                 imageLink: a.imageLink,
                 order: a.order,

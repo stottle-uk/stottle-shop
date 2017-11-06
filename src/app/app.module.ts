@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatSidenavModule, MatButtonModule, MatToolbarModule, MatIconModule, MatMenuModule } from '@angular/material';
-
+import { MatSidenavModule, MatButtonModule, MatToolbarModule, MatIconModule, MatMenuModule, MatListModule } from '@angular/material';
 
 import { CartModule } from './cart/cart.module';
 import { CategoriesModule } from './categories/categories.module';
@@ -29,6 +28,7 @@ import { FooterComponent } from './footer/footer.component';
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
+    MatListModule,
     CartModule,
     CategoriesModule,
     FilterModule,

@@ -2,15 +2,57 @@
   The Cart
 </h2>
 
-{{cartSummaryItems | async}}
+<mat-list>
+  <mat-list-item *ngFor="let summaryItem of cartService.observableSummary | async">
+    <img matListAvatar src="http://via.placeholder.com/100x100" alt="...">
+    <h3 matLine>{{summaryItem.displayName}}</h3>
+    <p matLine>
+      <span>{{summaryItem.price | currency:'GBP'}}</span>
+    </p>
+    <div matLine fxLayout="row" style="text-align: center">
+      <div fxFlex="33">
+        <button mat-icon-button id="removeFromCart" (click)="removeFromCart(summaryItem)">-</button>
+      </div>
+      <div fxFlex="33">
+        <button mat-icon-button id="cartCount">{{ getCount(summaryItem) | async}}</button>
+      </div>
+      <div fxFlex="33">
+        <button mat-icon-button id="addToCart" (click)="addToCart(summaryItem)">+</button>
+      </div>
+    </div>
+  </mat-list-item>
+</mat-list>
 
-<div *ngFor="let summaryItem of cartService.observableSummary | async">
-  <mat-card>
-    <pre>{{summaryItem | json}}</pre>
+<!-- <div fxLayout="column">
+  <div fxFlex *ngFor="let summaryItem of cartService.observableSummary | async">
+    <mat-card class="stottle-cart-summary-item">
 
-    <button id="addToCart" (click)="addToCart(summaryItem)">+</button>
-    <span>{{ getCount(summaryItem) | async}}</span>
-    <button id="removeFromCart" (click)="removeFromCart(summaryItem)">-</button>
+      <div fxLayout="row">
+        <div fxFlex="30">
+          <img mat-card-image src="http://via.placeholder.com/300x300" />
+        </div>
+        <div fxFlex="70" style="text-align: center">
+          <md-card-content>
+            <mat-card-title>{{summaryItem.displayName}}</mat-card-title>
+          </md-card-content>
 
-  </mat-card>
-</div>
+          <mat-card-actions>
+            <div class="container">
+              <div fxLayout="row" style="text-align: center">
+                <div fxFlex="33">
+                  <button mat-icon-button id="removeFromCart" (click)="removeFromCart(summaryItem)">-</button>
+                </div>
+                <div fxFlex="33">
+                  <button mat-icon-button id="cartCount">{{ getCount(summaryItem) | async}}</button>
+                </div>
+                <div fxFlex="33">
+                  <button mat-icon-button id="addToCart" (click)="addToCart(summaryItem)">+</button>
+                </div>
+              </div>
+            </div>
+          </mat-card-actions>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div> -->

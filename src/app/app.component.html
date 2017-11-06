@@ -1,32 +1,31 @@
+<mat-toolbar color="primary">
+  <span>stottle-shop</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button (click)="isSidenavOpen ? sidenav.close() : sidenav.open(); isSidenavOpen = !isSidenavOpen; showCart = false;">
+    <mat-icon>filter_list</mat-icon>
+  </button>
+  <button mat-icon-button (click)="isSidenavOpen ? sidenav.close() : sidenav.open(); isSidenavOpen = !isSidenavOpen; showCart = true;">
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+  <button mat-icon-button>
+    <mat-icon>person</mat-icon>
+  </button>
+</mat-toolbar>
+
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav class="example-sidenav">
-    <stottle-categories></stottle-categories>
-    <stottle-filter></stottle-filter>
+    <div *ngIf="!showCart">
+      <stottle-search></stottle-search>
+      <stottle-categories></stottle-categories>
+      <stottle-filter></stottle-filter>
+    </div>
+    <stottle-cart *ngIf="showCart"></stottle-cart>
   </mat-sidenav>
-
-  <mat-toolbar color="primary">
-    <span>stottle-shop</span>
-    <span class="example-spacer"></span>
-    <stottle-search></stottle-search>
-    <button mat-icon-button [mat-menu-trigger-for]="menu">
-      <mat-icon>filter_list</mat-icon>
-    </button>
-    <button mat-icon-button (click)="sidenav.open()">
-      <mat-icon>add_shopping_cart</mat-icon>
-    </button>
-  </mat-toolbar>
-  <mat-menu x-position="before" #menu="matMenu">
-    <button mat-menu-item>Option 1</button>
-    <button mat-menu-item>Option 2</button>
-  </mat-menu>
 
   <div class="example-sidenav-content">
     <div fxLayout="column">
       <div fxFlex>
         <stottle-products></stottle-products>
-      </div>
-      <div fxFlex>
-        <stottle-cart></stottle-cart>
       </div>
       <div fxFlex>
         <stottle-footer></stottle-footer>

@@ -1,10 +1,18 @@
 <h2 class="mb-5">
   Filters
 </h2>
-
-<div *ngFor="let filter of filters | async">
-  {{filter.displayName}}  {{filter.items[0].displayName}}
+<!-- 
+<div>
+  {{filter.displayName}} {{filter.items[0].displayName}}
   <div *ngFor="let childFilter of filter.items">
     <pre (click)="toggleFilter(childFilter)">{{childFilter | json}}</pre>
   </div>
-</div>
+</div> -->
+
+
+<mat-selection-list #filters *ngFor="let filter of filters | async">
+  {{filter.displayName}}
+  <mat-list-option *ngFor="let childFilter of filter.items" (click)="toggleFilter(childFilter)">
+    {{childFilter.displayName}}
+  </mat-list-option>
+</mat-selection-list>

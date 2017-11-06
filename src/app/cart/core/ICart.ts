@@ -3,7 +3,7 @@ import { Observable } from "rxjs/Observable";
 export interface ICartItem {
     id: string;    
     imageLink: string,
-    description: string,
+    displayName: string,
     detailLink: string,
     price: number,
     order: number

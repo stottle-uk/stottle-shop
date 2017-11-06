@@ -59,7 +59,6 @@ export class ProductsService {
                     .get<IProduct[]>(`http://localhost:5000/api/products/?${criteria}`);
             })
             .subscribe(products => {
-                console.log(products)
                 this._observableProducts.next(products);
             });
     }
