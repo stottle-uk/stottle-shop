@@ -1,3 +1,6 @@
+import { IChildCategory } from "../../categories/core/ICategory";
+import { IFilterItem } from "../../filter/core/IFilterItem";
+
 export interface IProduct {
     id: string;
     detailLink: string;
@@ -6,4 +9,10 @@ export interface IProduct {
     order: number;
     price: number;
     categoryCode: string;
+}
+
+export interface IProductFilters {
+    category: IChildCategory;
+    filters: IFilterItem[];
+    searchTerm: string;
 }

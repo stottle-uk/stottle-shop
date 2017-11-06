@@ -14,13 +14,7 @@ import { SearchService } from '../../search/core/search.service';
 
 import { IChildCategory } from '../../categories/core/ICategory';
 import { IFilterItem } from '../../filter/core/IFilterItem';
-import { IProduct } from './IProduct';
-
-export interface IProductFilters {
-    category: IChildCategory;
-    filters: IFilterItem[];
-    searchTerm: string;
-}
+import { IProduct, IProductFilters } from './IProduct';
 
 @Injectable()
 export class ProductsService {
